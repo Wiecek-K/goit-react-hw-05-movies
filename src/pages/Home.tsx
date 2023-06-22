@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchPopular } from "../services/api";
 import type { PopularResultsT } from "../types/types";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const [filmList, setFilmList] = useState<PopularResultsT[]>([]);
+  const [filmsList, setFilmsList] = useState<PopularResultsT[]>([]);
   useEffect(() => {
     (async () => {
       const data = await fetchPopular();
-      console.log(data);
-      setFilmList(data.results);
+      setFilmsList(data.results);
     })();
   }, []);
 
@@ -16,9 +16,9 @@ export const Home = () => {
     <div>
       <h2>Trending today</h2>
       <ul>
-        {filmList.map((film) => (
+        {filmsList.map((film) => (
           <li key={film.id}>
-            <p>{film.original_title}</p>
+            <Link to={`/movies/${film.id}`}>{film.title}</Link>
           </li>
         ))}
       </ul>

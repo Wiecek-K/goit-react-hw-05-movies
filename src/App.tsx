@@ -1,6 +1,7 @@
 import "./App.css";
 import { Home } from "./pages/Home";
 import { Movies } from "./pages/Movies";
+import { MoviePage } from "./pages/MoviePage";
 
 import { Routes, Route, Link } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/movies/:filmId" element={<MoviePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

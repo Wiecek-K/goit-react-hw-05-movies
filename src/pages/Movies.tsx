@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { fetchByName } from "../services/api";
 import type { PopularResultsT } from "../types/types";
-
+import { Link } from "react-router-dom";
 export const Movies = () => {
   const [inputValue, setInputValue] = useState("");
   const [filmList, setFilmList] = useState<PopularResultsT[]>([]);
@@ -17,8 +17,6 @@ export const Movies = () => {
       console.log(data);
       setFilmList(data.results);
     })();
-
-    console.log("Wartość pola tekstowego:", inputValue);
   };
 
   return (
@@ -35,7 +33,7 @@ export const Movies = () => {
       <ul>
         {filmList.map((film) => (
           <li key={film.id}>
-            <p>{film.original_title}</p>
+            <Link to={`/movies/${film.id}`}>{film.title}</Link>
           </li>
         ))}
       </ul>
