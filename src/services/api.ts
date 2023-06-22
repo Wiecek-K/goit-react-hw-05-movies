@@ -1,13 +1,13 @@
 import { FetchFilmsType } from "../types/types";
 
-const API_KEY = "?api_key=964358699754c21d74c014b561cf196c";
-const API_ADDRESS = "https://api.themoviedb.org/3/movie/popular";
+const API_KEY = "api_key=80b0760fd4c0a90f68de639a2aacad9a";
+const API_ADDRESS = "https://api.themoviedb.org/3";
 
 export const fetchPopular = async (): Promise<FetchFilmsType> => {
   try {
-    console.log(API_ADDRESS + API_KEY);
-
-    const response = await fetch(API_ADDRESS + API_KEY);
+    const response = await fetch(
+      API_ADDRESS + "/trending/movie/week?language=en-US&" + API_KEY
+    );
     if (!response.ok) {
       throw new Error("Błąd sieciowy - " + response.status);
     }
@@ -19,3 +19,22 @@ export const fetchPopular = async (): Promise<FetchFilmsType> => {
     throw error;
   }
 };
+
+export const fetchByName = async (name: string): Promise<FetchFilmsType> => {
+  try {
+    const response = await fetch(
+      `${API_ADDRESS}/search/movie?&include_adult=false&language=en-US&page=1&query=${name}&${API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error("Błąd sieciowy - " + response.status);
+    }
+    const data: FetchFilmsType = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Wystąpił błąd:", error);
+    throw error;
+  }
+};
+
+// https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1
