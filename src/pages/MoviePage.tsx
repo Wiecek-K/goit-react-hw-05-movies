@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchDetails, fetchPopular } from "../services/api";
+import { fetchDetails } from "../services/api";
 import type { MovieDetailsT } from "../types/types";
 import { useParams } from "react-router-dom";
+import css from "./MoviePage.module.css";
 
 export const MoviePage = () => {
   const { filmId } = useParams<{ filmId: string }>();
@@ -19,18 +20,21 @@ export const MoviePage = () => {
   }, [filmId]);
 
   return (
-    <div>
+    <div className={css.container}>
       <img
+        className={css.poster}
         src={`https://image.tmdb.org/t/p/original/${filmDetails?.poster_path}`}
       />
-      <h2>{filmDetails?.title}</h2>
-      <p>
-        User Score <span>{`${filmDetails?.vote_average}%`}</span>
-      </p>
-      <h3>Overview</h3>
-      <p>{filmDetails?.overview}</p>
-      <h3>Genres</h3>
-      <p>{filmDetails?.genres.map((genre) => genre.name)}</p>
+      <div className={css.textWrapper}>
+        <h2>{filmDetails?.title}</h2>
+        <p>
+          User Score <span>{`${filmDetails?.vote_average}%`}</span>
+        </p>
+        <h3>Overview</h3>
+        <p>{filmDetails?.overview}</p>
+        <h3>Genres</h3>
+        <p>{filmDetails?.genres.map((genre) => genre.name)}</p>
+      </div>
     </div>
   );
 };

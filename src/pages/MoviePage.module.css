@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  border-bottom: 2px solid grey;
+  padding: 20px;
+}
+.poster {
+  width: 300px;
+}
