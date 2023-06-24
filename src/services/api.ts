@@ -1,4 +1,10 @@
-import { FetchFilmsType, PopularResultsT, MovieDetailsT } from "../types/types";
+import {
+  FetchFilmsType,
+  PopularResultsT,
+  MovieDetailsT,
+  CreditsT,
+  ActorT,
+} from "../types/types";
 
 const API_KEY = "api_key=80b0760fd4c0a90f68de639a2aacad9a";
 const API_ADDRESS = "https://api.themoviedb.org/3";
@@ -38,7 +44,7 @@ export const fetchByName = async (
     throw error;
   }
 };
-export const fetchDetails = async (id: number): Promise<MovieDetailsT> => {
+export const fetchDetails = async (id: string): Promise<MovieDetailsT> => {
   try {
     const response = await fetch(
       `${API_ADDRESS}/movie/${id}?language=en-US&page=1&query=${id}&${API_KEY}`
@@ -46,8 +52,24 @@ export const fetchDetails = async (id: number): Promise<MovieDetailsT> => {
     if (!response.ok) {
       throw new Error("Błąd sieciowy - " + response.status);
     }
-    const data: MovieDetailsT= await response.json();
+    const data: MovieDetailsT = await response.json();
     return data;
+  } catch (error) {
+    console.error("Wystąpił błąd:", error);
+    throw error;
+  }
+};
+
+export const fetchCast = async (id: string): Promise<ActorT[]> => {
+  try {
+    const response = await fetch(
+      `${API_ADDRESS}/movie/${id}/credits?language=en-US&${API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error("Błąd sieciowy - " + response.status);
+    }
+    const data: CreditsT = await response.json();
+    return data.cast;
   } catch (error) {
     console.error("Wystąpił błąd:", error);
     throw error;
