@@ -12,7 +12,6 @@ export const MoviePage = () => {
     if (filmId) {
       (async () => {
         const data = await fetchDetails(filmId);
-        console.log("to ten", data);
         setFilmDetails(data);
       })();
     }

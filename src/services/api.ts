@@ -2,8 +2,10 @@ import {
   FetchFilmsType,
   PopularResultsT,
   MovieDetailsT,
-  CreditsT,
+  CastFetchT,
   ActorT,
+  ReviewT,
+  ReviewsFetchT,
 } from "../types/types";
 
 const API_KEY = "api_key=80b0760fd4c0a90f68de639a2aacad9a";
@@ -68,7 +70,7 @@ export const fetchCast = async (id: string): Promise<ActorT[]> => {
     if (!response.ok) {
       throw new Error("Błąd sieciowy - " + response.status);
     }
-    const data: CreditsT = await response.json();
+    const data: CastFetchT = await response.json();
     return data.cast;
   } catch (error) {
     console.error("Wystąpił błąd:", error);
@@ -76,6 +78,23 @@ export const fetchCast = async (id: string): Promise<ActorT[]> => {
   }
 };
 
+export const fetchReviews = async (id: string): Promise<ReviewT[]> => {
+  try {
+    console.log(`${API_ADDRESS}/movie/${id}/reviews?language=en-US&${API_KEY}`);
+
+    const response = await fetch(
+      `${API_ADDRESS}/movie/${id}/reviews?language=en-US&${API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error("Błąd sieciowy - " + response.status);
+    }
+    const data: ReviewsFetchT = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Wystąpił błąd:", error);
+    throw error;
+  }
+};
 // https://api.themoviedb.org/3/movie/298618?language=en-US
 
 // https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1

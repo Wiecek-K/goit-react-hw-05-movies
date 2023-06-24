@@ -6,7 +6,6 @@ import css from "./Cast.module.css";
 
 export const Cast = () => {
   const { filmId } = useParams<{ filmId: string }>();
-  console.log(filmId); // adventure, herman-melville
   const [cast, setCast] = useState<ActorT[]>([]);
   useEffect(() => {
     if (filmId) {

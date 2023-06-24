@@ -5,6 +5,7 @@ import { MoviePage } from "./pages/MoviePage";
 import { Cast } from "./pages/Cast";
 import { Routes, Route, Link } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
+import { Reviews } from "./pages/Reviews";
 function App() {
   return (
     <div>
@@ -17,9 +18,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:filmId" element={<MoviePage />}>
           <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Home />} />
-          {/* <Route path="/cast" element={<Cast />} />
-          <Route path="/reviews" element={<Home />} /> */}
+          <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
