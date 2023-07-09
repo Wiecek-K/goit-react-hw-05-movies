@@ -2,10 +2,10 @@ import "./App.css";
 import { Home } from "./pages/Home";
 import { Movies } from "./pages/Movies";
 import { MoviePage } from "./pages/MoviePage";
-import { Cast } from "./pages/Cast";
+import { Cast } from "./components/Cast";
 import { Routes, Route, Link } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
-import { Reviews } from "./pages/Reviews";
+import { Reviews } from "./components/Reviews";
 function App() {
   return (
     <div>

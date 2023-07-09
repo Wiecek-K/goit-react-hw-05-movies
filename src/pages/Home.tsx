@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [filmsList, setFilmsList] = useState<PopularResultsT[]>([]);
+
   useEffect(() => {
     (async () => {
       const data = await fetchPopular();

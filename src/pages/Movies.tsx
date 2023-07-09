@@ -2,19 +2,19 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { fetchByName } from "../services/api";
 import type { PopularResultsT } from "../types/types";
 import { Link } from "react-router-dom";
+
 export const Movies = () => {
-  const [inputValue, setInputValue] = useState("");
   const [filmList, setFilmList] = useState<PopularResultsT[]>([]);
+  const [query, setQuery] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setQuery(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     (async () => {
-      const data = await fetchByName(inputValue);
-      console.log(data);
+      const data = await fetchByName(query);
       setFilmList(data.results);
     })();
   };
@@ -24,9 +24,10 @@ export const Movies = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={inputValue}
+          value={query}
           onChange={handleChange}
           placeholder="Wprowadź tekst"
+          name="searchValue"
         />
         <button type="submit">Submit</button>
       </form>
