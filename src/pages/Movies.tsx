@@ -1,20 +1,36 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { fetchByName } from "../services/api";
 import type { PopularResultsT } from "../types/types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export const Movies = () => {
   const [filmList, setFilmList] = useState<PopularResultsT[]>([]);
-  const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const query = searchParams.get("query");
+    if (query) {
+      setInputValue(query);
+      (async () => {
+        const data = await fetchByName(query);
+        setFilmList(data.results);
+      })();
+    }
+  }, [inputValue, location]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    setInputValue(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    navigate(`?query=${inputValue}`);
     (async () => {
-      const data = await fetchByName(query);
+      const data = await fetchByName(inputValue);
       setFilmList(data.results);
     })();
   };
@@ -24,7 +40,7 @@ export const Movies = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={query}
+          value={inputValue}
           onChange={handleChange}
           placeholder="Wprowadź tekst"
           name="searchValue"
