@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchDetails } from "../services/api";
-import type { MovieDetailsT } from "../types/types";
+import { fetchDetails } from "../../services/api";
+import type { IMovieDetails } from "../../types/types";
 import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
 import css from "./MoviePage.module.css";
 
 export const MoviePage = () => {
   const { filmId } = useParams<{ filmId: string }>();
-  const [filmDetails, setFilmDetails] = useState<MovieDetailsT>();
+  const [filmDetails, setFilmDetails] = useState<IMovieDetails>();
 
   const navigate = useNavigate();
 

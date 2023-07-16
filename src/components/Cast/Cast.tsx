@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchCast } from "../services/api";
-import type { ActorT } from "../types/types";
+import { fetchCast } from "../../services/api";
+import type { IActor } from "../../types/types";
 import { useParams } from "react-router-dom";
 import css from "./Cast.module.css";
 
 export const Cast = () => {
   const { filmId } = useParams<{ filmId: string }>();
-  const [cast, setCast] = useState<ActorT[]>([]);
+  const [cast, setCast] = useState<IActor[]>([]);
   useEffect(() => {
     if (filmId) {
       (async () => {

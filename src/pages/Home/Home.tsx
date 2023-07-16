@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchPopular } from "../services/api";
-import type { PopularResultsT } from "../types/types";
+import { fetchPopular } from "../../services/api";
+import type { IPopularResults } from "../../types/types";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const [filmsList, setFilmsList] = useState<PopularResultsT[]>([]);
+  const [filmsList, setFilmsList] = useState<IPopularResults[]>([]);
 
   useEffect(() => {
     (async () => {

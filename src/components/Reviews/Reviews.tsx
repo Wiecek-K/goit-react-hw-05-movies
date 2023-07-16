@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchReviews } from "../services/api";
-import type { ReviewT } from "../types/types";
+import { fetchReviews } from "../../services/api";
+import type { IReview } from "../../types/types";
 import { useParams } from "react-router-dom";
 
 export const Reviews = () => {
   const { filmId } = useParams<{ filmId: string }>();
-  const [reviews, setReviews] = useState<ReviewT[]>([]);
+  const [reviews, setReviews] = useState<IReview[]>([]);
   useEffect(() => {
     if (filmId) {
       (async () => {

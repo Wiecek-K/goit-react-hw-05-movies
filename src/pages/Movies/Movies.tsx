@@ -1,10 +1,10 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import { fetchByName } from "../services/api";
-import type { PopularResultsT } from "../types/types";
+import { fetchByName } from "../../services/api";
+import type { IPopularResults } from "../../types/types";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export const Movies = () => {
-  const [filmList, setFilmList] = useState<PopularResultsT[]>([]);
+  const [filmList, setFilmList] = useState<IPopularResults[]>([]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 

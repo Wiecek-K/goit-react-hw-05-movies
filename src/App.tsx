@@ -1,11 +1,11 @@
 import "./App.css";
-import { Home } from "./pages/Home";
-import { Movies } from "./pages/Movies";
-import { MoviePage } from "./pages/MoviePage";
-import { Cast } from "./components/Cast";
+import { Home } from "./pages/Home/Home";
+import { Movies } from "./pages/Movies/Movies";
+import { MoviePage } from "./pages/MoviePage/MoviePage";
+import { Cast } from "./components/Cast/Cast";
 import { Routes, Route, Link } from "react-router-dom";
-import { NotFound } from "./pages/NotFound";
-import { Reviews } from "./components/Reviews";
+import { NotFound } from "./pages/NotFound/NotFound";
+import { Reviews } from "./components/Reviews/Reviews";
 function App() {
   return (
     <div>

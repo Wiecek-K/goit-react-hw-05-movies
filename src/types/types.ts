@@ -4,11 +4,11 @@ export interface FetchFilmsType<T> {
   total_pages: number;
   total_results: number;
 }
-export interface PopularResultsT {
+export interface IPopularResults {
   title: string;
   id: number;
 }
-export interface MovieDetailsT {
+export interface IMovieDetails {
   title: string;
   id: number;
   backdrop_path: string;
@@ -17,11 +17,11 @@ export interface MovieDetailsT {
   vote_average: number;
   overview: string;
 }
-export interface CastFetchT {
+export interface ICastFetch {
   id: number;
-  cast: ActorT[];
+  cast: IActor[];
 }
-export interface ActorT {
+export interface IActor {
   adult: false;
   gender: 1 | 2;
   id: number;
@@ -35,14 +35,14 @@ export interface ActorT {
   credit_id: string;
   order: number;
 }
-export interface ReviewsFetchT {
+export interface IReviewsFetch {
   id: number;
   page: number;
-  results: ReviewT[];
+  results: IReview[];
   total_pages: number;
   total_result: number;
 }
-export interface ReviewT {
+export interface IReview {
   author: string;
   author_details: {
     name: string;
