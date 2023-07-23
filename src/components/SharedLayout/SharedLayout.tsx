@@ -1,16 +1,16 @@
-import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { Suspense } from "react";
+import { Loader } from "../Loader/Loader";
 
-interface SharedLayoutProps {
-  children: ReactNode;
-}
-
-export const SharedLayout = ({ children }: SharedLayoutProps) => (
+export const SharedLayout = () => (
   <>
+    {" "}
     <nav>
       <Link to="/">Home</Link>
       <Link to="/movies/">Movies</Link>
     </nav>
-    {children}
+    <Suspense fallback={<Loader />}>
+      <Outlet />
+    </Suspense>
   </>
 );
