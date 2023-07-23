@@ -1,14 +1,12 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { fetchByName } from "../../services/api";
 import type { IPopularResults } from "../../types/types";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Movies = () => {
   const [filmList, setFilmList] = useState<IPopularResults[]>([]);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
-
-  // const location = useLocation();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);

@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchDetails } from "../../services/api";
 import type { IMovieDetails } from "../../types/types";
-import {
-  Link,
-  Outlet,
-  useParams,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Link, Outlet, useParams, useLocation } from "react-router-dom";
 import css from "./MoviePage.module.css";
 
 export const MoviePage = () => {
   const { filmId } = useParams<{ filmId: string }>();
   const [filmDetails, setFilmDetails] = useState<IMovieDetails>();
+  const location = useLocation();
 
   useEffect(() => {
     if (filmId) {
@@ -23,12 +18,9 @@ export const MoviePage = () => {
     }
   }, [filmId]);
 
-  const location = useLocation();
-  console.log(location.state.from);
-
   return (
     <>
-      <Link to={location.state.from}>
+      <Link to={location.state?.from ?? "/"}>
         <button>Go back</button>
       </Link>
       <div className={css.filmDetailsWrapper}>
