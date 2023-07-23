@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { fetchDetails } from "../../services/api";
 import type { IMovieDetails } from "../../types/types";
-import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import css from "./MoviePage.module.css";
 
 export const MoviePage = () => {
   const { filmId } = useParams<{ filmId: string }>();
   const [filmDetails, setFilmDetails] = useState<IMovieDetails>();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (filmId) {
@@ -19,13 +23,14 @@ export const MoviePage = () => {
     }
   }, [filmId]);
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  const location = useLocation();
+  console.log(location.state.from);
 
   return (
     <>
-      <button onClick={goBack}>Go back</button>
+      <Link to={location.state.from}>
+        <button>Go back</button>
+      </Link>
       <div className={css.filmDetailsWrapper}>
         <img
           className={css.poster}
@@ -57,3 +62,5 @@ export const MoviePage = () => {
     </>
   );
 };
+
+export default MoviePage;

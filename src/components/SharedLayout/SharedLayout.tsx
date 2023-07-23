@@ -9,7 +9,7 @@ export const SharedLayout = ({ children }: SharedLayoutProps) => (
   <>
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/movies">Movies</Link>
+      <Link to="/movies/">Movies</Link>
     </nav>
     {children}
   </>

@@ -19,10 +19,12 @@ export const Home = () => {
       <ul>
         {filmsList.map((film) => (
           <li key={film.id}>
-            <Link to={`/movies/${film.id}`}>{film.title}</Link>
+            <Link to={`/movies/${film.id}`} state={{ from: "/" }}>{film.title}</Link>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default Home;

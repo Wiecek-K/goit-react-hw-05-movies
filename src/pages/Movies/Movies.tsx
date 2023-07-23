@@ -8,7 +8,7 @@ export const Movies = () => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -20,7 +20,7 @@ export const Movies = () => {
         setFilmList(data.results);
       })();
     }
-  }, [inputValue, location]);
+  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -50,10 +50,17 @@ export const Movies = () => {
       <ul>
         {filmList.map((film) => (
           <li key={film.id}>
-            <Link to={`/movies/${film.id}`}>{film.title}</Link>
+            <Link
+              to={`/movies/${film.id}`}
+              state={{ from: `/movies/?query=${inputValue}` }}
+            >
+              {film.title}
+            </Link>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default Movies;
